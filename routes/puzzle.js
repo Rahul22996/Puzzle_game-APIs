@@ -17,13 +17,13 @@ const upload = multer({ storage: storage })
 
 /* GET puzzle listing. */
 
-router.get('/', PuzzleController.ShowPuzzle);
+router.post('/add_puzzle',upload.single('image'), PuzzleController.AddPuzzle);
 
-router.post('/',upload.single('image'), PuzzleController.AddPuzzle);
+router.get('/show_puzzle', PuzzleController.ShowPuzzle);
 
-router.patch('/',upload.single('image'), PuzzleController.UpdatePuzzle);
+router.patch('/update_puzzle',upload.single('image'), PuzzleController.UpdatePuzzle);
 
-router.delete('/', PuzzleController.DeletePuzzle);
+router.delete('/delete_puzzle', PuzzleController.DeletePuzzle);
 
 
 

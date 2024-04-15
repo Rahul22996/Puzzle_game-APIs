@@ -18,13 +18,13 @@ const upload = multer({ storage: storage })
 
 /* GET category listing. */
 
-router.get('/', CategoryController.ShowCategory);
+router.post('/add_category', upload.single('image'), CategoryController.AddCategory);
 
-router.post('/', upload.single('image'), CategoryController.AddCategory);
+router.get('/show_category', CategoryController.ShowCategory);
 
-router.patch('/', upload.single('image'), CategoryController.UpdateCategory);
+router.patch('/update_category', upload.single('image'), CategoryController.UpdateCategory);
 
-router.delete('/', CategoryController.DeleteCategory);
+router.delete('/delete_category', CategoryController.DeleteCategory);
 
 module.exports = router;
 

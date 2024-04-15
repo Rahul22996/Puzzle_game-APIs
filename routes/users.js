@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/signup', UserController.Signup);
 router.post('/login', UserController.Login);
-router.get('/oneUser', UserController.Secure, UserController.oneUser);
+// router.get('/oneUser', UserController.Secure, UserController.oneUser);
 
 module.exports = router;
 

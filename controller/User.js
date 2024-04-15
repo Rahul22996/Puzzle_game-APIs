@@ -33,32 +33,6 @@ async function main(email) {
 
 // -------------------------------------------------------------------------------------------------------------
 
-exports.Secure = async function (req, res, next) {
-    try {
-        const token = req.headers.token
-        if(!token) {
-            throw new Error('Please Get a Token')
-        }
-        var decoded = jwt.verify(token, 'PASS');
-
-        const checkUser = await USER.findById(decoded.id) 
-
-        if(!checkUser) {
-            throw new Error('User not Found')
-        }
-        req.userID = decoded.id;
-        next()
-    } catch (error) {
-        res.status(404).json({
-            status: "Fail",
-            message: error.message
-            
-        })
-    }
-}
-
-// -------------------------------------------------------------------------------------------------------------
-
 exports.Signup = async function (req, res, next) {
     try {
         if (!req.body.name || !req.body.email || !req.body.password || !req.body.gender) {
@@ -85,7 +59,7 @@ exports.Signup = async function (req, res, next) {
     }
 }
 
-    // -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 
 exports.Login = async function (req, res, next) {
     try {
@@ -117,22 +91,6 @@ exports.Login = async function (req, res, next) {
         res.status(404).json({
             status: "Fail",
             message: error.message
-        })
-    }
-}
-
-exports.oneUser = async function(req, res, next) {
-    try {
-        let data = await USER.findById(req.userID);
-
-        res.status(201).json({
-            status : "Success",
-            data
-        })
-    } catch (error) {
-        res.status(404).json({
-            status : "Fail",
-            message : "User not Found"
         })
     }
 }
